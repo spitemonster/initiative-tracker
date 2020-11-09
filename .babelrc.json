@@ -1,0 +1,18 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets":
+                {
+                    "esmodules": false
+                }
+            }
+        ]
+    ]
+}
+
+// ["es2015",
+// {
+//     "modules": false
+// }]

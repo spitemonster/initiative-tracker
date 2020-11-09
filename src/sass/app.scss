@@ -1,0 +1,65 @@
+@import 'reset';
+@import 'grid';
+@import 'variables';
+@import 'animations';
+@import 'characterCard';
+@import 'characterAdd';
+@import 'initiativeTracker';
+@import 'buttons';
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+:root,
+body {
+    min-height: 100vh;
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+    }
+}
+
+:root {
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.table-head {
+    padding: .5rem;
+    grid-template-columns: 40px repeat(11, 1fr);
+
+    font-weight: 900;
+    text-transform: uppercase;
+
+    .name,
+    .initiative,
+    .conditions,
+    .hitpoints {
+        text-align: center;
+    }
+
+    .name {
+        --span: 2;
+    }
+
+    .hitpoints {
+        --span: 3;
+    }
+
+    .initiative {
+        --span: 2;
+    }
+
+    .conditions {
+        grid-column-end: 13;
+    }
+}
+
+.error {
+    border: 2px solid $red !important;
+}

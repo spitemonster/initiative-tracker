@@ -1,0 +1,158 @@
+.initiative-tracker {
+    --start: 2;
+    --span: 10;
+
+
+    &.awaiting {
+        .character-card:not(.ignore) {
+            border-color: rgba($black, .3);
+
+            & *:not(.character-card__open) {
+                opacity: .3;
+            }
+
+            .character-card__open:after {
+                animation: pulse 1s infinite;
+            }
+
+            .character-card__open {
+                cursor: pointer;
+            }
+        }
+
+        .ignore {}
+
+
+    }
+
+    &.focusing {
+        .character-card {
+            border-color: rgba(black, 0.3);
+
+            &>* {
+                opacity: .3;
+            }
+
+            &__conditions:hover {
+                opacity: 1 !important;
+
+                span {
+                    opacity: 1;
+                }
+            }
+
+            &.focused {
+                border-color: $black;
+
+                * {
+                    opacity: 1;
+                }
+
+                transform: scale(1.01);
+            }
+        }
+    }
+}
+
+.endTurn {
+    display: block;
+    width: auto;
+    padding: .5rem 1rem;
+    border: 2px solid $black;
+    background: $white;
+    position: fixed;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 240ms ease-out;
+    text-transform: uppercase;
+    position: relative;
+
+    &:hover {
+        background: $black;
+        color: $white;
+    }
+}
+
+input {
+
+    &[type="checkbox"],
+    &[type="radio"] {
+        display: none;
+
+        &+span {
+            display: flex;
+            height: 15px;
+            width: 15px;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid $black;
+            background: $white;
+            color: rgba($white, 0);
+            cursor: pointer;
+        }
+
+        &:checked {
+            &+span {
+                background: $black;
+                color: rgba($white, 1);
+            }
+        }
+    }
+
+    &[type="text"] {
+        border: none;
+        background: $white;
+        border-bottom: 2px solid $black;
+    }
+}
+
+.button-wrap {
+    position: fixed;
+    bottom: 1rem;
+    background: white;
+    border: 2px solid $black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    transition: all 240ms ease-out;
+
+    right: -9rem;
+    padding: 1rem;
+
+    label {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        transition: all 240ms ease-out;
+        opacity: 0;
+        text-transform: uppercase;
+        font-family: 'Titillium Web';
+        font-weight: bold;
+    }
+
+    .btn {
+        position: relative;
+        width: 100%;
+
+        &:nth-of-type(2) {
+            margin-top: 1rem;
+
+            &:hover {
+                background: $red;
+                border-color: $red;
+            }
+        }
+    }
+
+    &:hover {
+
+        right: 0;
+        margin-right: 1rem;
+
+        label {
+            opacity: 1;
+        }
+    }
+}

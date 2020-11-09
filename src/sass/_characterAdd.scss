@@ -1,0 +1,37 @@
+.character-add {
+
+    position: fixed;
+    bottom: 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    width: calc(calc(100% / 12) * 10);
+    left: calc(calc(100% / 12));
+
+    border: 2px solid $black;
+    background: $white;
+    transition: all 240ms ease-out;
+    bottom: -6rem;
+
+    label,
+    button {
+        margin: 0 1rem;
+    }
+
+    label {
+        display: flex;
+        align-items: flex-end;
+        text-transform: uppercase;
+        justify-content: space-between;
+
+        input,
+        span {
+            margin-left: .5rem;
+            text-align: right;
+        }
+    }
+
+    &.show {
+        bottom: 0;
+    }
+}

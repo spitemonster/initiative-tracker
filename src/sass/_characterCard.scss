@@ -1,0 +1,469 @@
+.character-card {
+    // --start: 3;
+    // --span: 8;
+
+    @extend .grid--12;
+    grid-template-columns: 40px repeat(11, 1fr);
+    position: relative;
+    margin: 1rem 0;
+    border: 2px solid $black;
+    padding: 1rem .5rem;
+
+    &,
+    &>* {
+        transition: all 240ms ease-out;
+    }
+
+    input {
+        display: inline-block;
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: 1rem;
+        max-width: 2.5ch;
+        text-align: center;
+    }
+
+    &__open {
+        position: relative;
+        --span: 1;
+        border: 0;
+        background: none;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: .5rem;
+        font-weight: bold;
+
+        span {
+            display: block;
+            height: 2px;
+            width: 12px;
+            background: $black;
+
+            &:nth-of-type(1) {
+                margin-bottom: .25rem;
+            }
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: block;
+            background: $black;
+            border-radius: 50%;
+            height: 16px;
+            width: 16px;
+            top: calc(50% - 8px);
+            left: calc(50% - 8px);
+            opacity: 0;
+        }
+    }
+
+    &__name,
+    &__hitpoints,
+    &__condition {
+        --span: 2;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__name {
+        font-weight: 900;
+        text-transform: uppercase;
+        text-align: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    &__hitpoints {
+
+        --span: 2;
+
+        @media (max-width: 1440px) {
+            --span: 3;
+        }
+
+        position: relative;
+        justify-content: space-between;
+
+        padding: 0 15%;
+
+        span {
+            display: inline-block;
+            position: relative;
+            height: 15px;
+            width: 15px;
+            margin: .25rem;
+            background: $black;
+            border: 1px solid $black;
+            border-radius: 50%;
+
+
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                visibility: hidden;
+                height: 100%;
+                width: 100%;
+                background: $black;
+                border-radius: 50%;
+                z-index: 0;
+                animation-delay: inherit;
+            }
+
+            &:only-of-type {
+                background: $red;
+                border-color: $red;
+
+                &::after {
+                    background: $red;
+                    visibility: visible;
+                    animation: pulse 1.5s infinite;
+                }
+            }
+        }
+
+        &>button {
+            font-size: 1.5rem;
+            border: none;
+            background: none;
+            padding: 0 .125rem;
+            margin: 0 .25rem;
+            cursor: pointer;
+
+            &.btn-hurt {
+                &:hover {
+                    background: $red;
+                    color: $white;
+                }
+            }
+
+            &.btn-heal {
+
+                &:hover {
+                    background: $blue;
+                    color: $white;
+                }
+            }
+        }
+
+        &:hover {
+            span {
+                &:nth-of-type(2) {
+                    &::after {
+                        animation-delay: 120ms;
+                    }
+                }
+
+                &:nth-of-type(3) {
+                    &::after {
+                        animation-delay: 240ms;
+                    }
+                }
+
+                &::after {
+                    visibility: visible;
+                    animation: pulse 1s 1 ease-out;
+                    animation-fill-mode: forwards;
+                }
+            }
+        }
+
+    }
+
+    &__conditions {
+        position: absolute;
+        bottom: -9px;
+        height: 18px;
+        color: $white;
+        grid-column-end: 13;
+        right: -10px;
+        display: flex;
+        flex-direction: row;
+
+        p {
+            background: $black;
+            position: relative;
+            font-weight: 900;
+            padding: 0 .5rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__utility,
+    &__initiative {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+    }
+
+    &__initiative {
+        --span: 1;
+    }
+
+    &__notes {
+        --span: 2;
+
+        @media (max-width: 1440px) {
+            grid-column-start: 8;
+            grid-column-end: 10;
+        }
+
+        textarea {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            resize: none;
+            font-family: inherit;
+            font-size: .75rem;
+            overflow: scroll;
+            border: 2px solid $black;
+            padding: .25rem;
+        }
+    }
+
+    &__utility {
+        height: 100%;
+        grid-column-end: 13;
+
+        &>button {
+            border: 2px solid $black;
+            background: $white;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 25px;
+            width: 25px;
+            padding: 0;
+            cursor: pointer;
+
+            &:hover {
+                background: $black;
+                color: $white;
+            }
+        }
+    }
+
+    .hurt,
+    .conditions,
+    .heal {
+        position: absolute;
+        top: 25%;
+        z-index: 99;
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        border: 2px solid $black;
+        padding: 0.5rem;
+        background: $white;
+
+        &.open {
+            visibility: visible;
+        }
+
+        label,
+        input {
+            font-size: .75rem;
+        }
+
+        label {
+            display: flex;
+            justify-content: space-between;
+
+            select {
+                width: 100%;
+            }
+        }
+
+        input {
+            border-bottom: 1px solid $black;
+
+            &[type="text"] {
+                width: 5ch;
+                max-width: none;
+            }
+        }
+
+        &>*:not(.btn) {
+            margin-bottom: .5rem;
+        }
+
+        .closeButton {
+            position: absolute;
+            top: -.5rem;
+            right: -.5rem;
+            width: 1rem;
+            height: 1rem;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            border: 2px solid black;
+            background: $white;
+            color: $black;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                background: $black;
+                color: $white;
+            }
+        }
+    }
+
+    .hurt {
+        left: 0;
+    }
+
+    .heal {
+        right: 0;
+    }
+
+    .conditions {
+        z-index: 99;
+
+        .closeCondition {
+            position: absolute;
+            top: -.5rem;
+            right: -.5rem;
+            width: 1rem;
+            height: 1rem;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            border: 2px solid black;
+            background: $white;
+            color: $black;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+
+    &.turnOver {
+        opacity: .3;
+        z-index: 0;
+
+        &,
+        * {
+            cursor: not-allowed;
+        }
+
+        &:hover {
+            opacity: .7;
+            z-index: 2;
+        }
+    }
+
+    .condition-marker {
+        width: auto;
+        transition: all 1000ms ease-out;
+    }
+
+    .charmed {
+        color: $pink;
+
+        &::after,
+        &::before {
+            content: "❤";
+            color: $pink;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1rem;
+            z-index: 0;
+
+            transition: transform 24ms linear;
+        }
+
+        &::before {
+            animation: 1.8s linear infinite float;
+        }
+
+        &::after {
+            animation-delay: 360ms;
+            animation: 1.3s linear infinite floatReverse;
+        }
+    }
+
+    .poisoned {
+        color: $green;
+        font-family: 'Nosifer';
+        font-size: .7rem;
+
+        &::after,
+        &::before {
+            content: "";
+            position: absolute;
+            height: 5px;
+            width: 5px;
+            border-top-right-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            transform: rotate(45deg);
+            background: $green;
+            animation: drip 1.6s ease-out infinite;
+            animation-timing-function: cubic-bezier(0.020, 0.450, 0.040, 0.935);
+            /* custom */
+        }
+
+        &::after {
+            bottom: 5px;
+            right: 1.2rem;
+            animation-duration: 1.1s;
+        }
+
+        &::before {
+            bottom: -3px;
+            left: .5rem;
+        }
+    }
+
+    .frightened {
+        color: $purple;
+
+        animation: shiver 240ms linear infinite;
+    }
+
+    .grappled {
+        color: $brown;
+    }
+
+    .burning {
+        transition: color 71ms ease-in-out;
+        animation: flame 2.7s infinite;
+    }
+
+    &.unconscious {
+        opacity: 0.3;
+        border-color: $red;
+
+        * {
+            text-decoration: line-through;
+        }
+    }
+
+    &:hover {
+        button.remove-character {
+            opacity: 1;
+        }
+    }
+}

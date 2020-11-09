@@ -1,0 +1,45 @@
+// {
+//     "compilerOptions":
+//     {
+//         "outDir": "./dist/",
+//         "noImplicitAny": true,
+//         "module": "es2015",
+//         "target": "es5",
+//         "jsx": "react",
+//         "allowJs": true,
+//         "allowSyntheticDefaultImports": true,
+//         "moduleResolution": "classic",
+//         "baseUrl": ".",
+//         "paths":
+//         {
+//             "@/*": ["src/*"],
+//         }
+//     },
+//     "include": [
+//         "./src/**/**/*"
+//     ]
+// }
+
+
+{
+    "compilerOptions":
+    {
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "ESNext",
+        "strict": true,
+        "lib": [
+            "dom",
+            "es5",
+            "es2015",
+            "es2015.promise"
+        ],
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+    },
+    "compileOnSave": false
+}
